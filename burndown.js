@@ -109,8 +109,8 @@ var BurnDownGraph = {
 		this._target.innerHTML = "";
 		this._canvas = document.createElement("canvas")
 		this._canvas.id = 'graph';
-		this._width = 1280;//screen.availWidth; 
-		this._height = 640;//screen.availHeight; 
+		this._width = 842 * 4;
+		this._height = 595 * 4;
 		this._canvas.className = 'canvasStyle';
 		this._canvas.width = this._width;
 		this._canvas.height = this._height;
@@ -164,13 +164,13 @@ var BurnDownGraph = {
 		var currentPointsLabel = totalDisplayPoints;
 		for (var y=0;y<=Math.floor(this._points)+yIncrement;y=y+yIncrement) {
 			var thisY = this._offsetYtopMargin+y*verticalSpacing;
-			this._writeText(currentPointsLabel, 25, thisY+5, "12px Arial", "#202020");
-			this._drawLine(this._offsetX, thisY, this._graphWidth, thisY, '#c0c0c0', 1);
+			this._writeText(currentPointsLabel, 15, thisY, "24px Arial", "#202020");
+			this._drawLine(this._offsetX, thisY, this._graphWidth, thisY, '#c0c0c0', 2);
 			currentPointsLabel = currentPointsLabel - yIncrement;
 		}
 
 		// diagonal!
-		this._drawLine(this._offsetX, yStartPoint, this._graphWidth, thisY, '#c0c0E2', 2);
+		this._drawLine(this._offsetX, yStartPoint, this._graphWidth, thisY, '#c0c0E2', 4);
 
 		// horizontal!
 		if($('#use_customtarget').is(':checked')){
@@ -192,7 +192,7 @@ var BurnDownGraph = {
                         // date
                         var labelDate = totalDays.shift();
                         var label = this._days[labelDate.getDay()]+' '+labelDate.getDate()+' '+this._months[labelDate.getMonth()];
-                        this._writeText(label, thisX+horizontalSpacing-32, this._graphHeight, "12px Arial", "#202020");
+                        this._writeText(label, thisX+horizontalSpacing-44, this._graphHeight, "24px Arial", "#202020");
                 }
                 var thisX = x*horizontalSpacing+this._offsetX;
                 this._drawLine(thisX, this._offsetYtopMargin, thisX, this._graphHeight-22, '#c0c0c0', 1);
