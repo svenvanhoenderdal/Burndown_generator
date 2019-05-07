@@ -110,7 +110,9 @@ var BurnDownGraph = {
 		this._canvas = document.createElement("canvas")
 		this._canvas.id = 'graph';
 		this._width = 842 * 4;
+// 		this._width = 842;
 		this._height = 595 * 4;
+// 		this._height = 595;
 		this._canvas.className = 'canvasStyle';
 		this._canvas.width = this._width;
 		this._canvas.height = this._height;
@@ -146,14 +148,12 @@ var BurnDownGraph = {
 	draw : function() {
 		var diffDays = Math.round((this._endDate - this._startDate)/(3600*1000*24));
 		var yIncrement = this._getYIncremental(diffDays);
-		
 		this._drawGrid(diffDays);
 		
 		// Y axis, number of points
 		var currentPoints = this._points;
 		var remainder = currentPoints % yIncrement;
-		displayRemainder = (remainder != 1) ? remainder : 0;
-		totalDisplayPoints = currentPoints - displayRemainder + yIncrement;
+		totalDisplayPoints = currentPoints - remainder + yIncrement;
 		// determine divider spaces
 		
 		var verticalSpacing = (this._height-this._offsetY-this._offsetYtopMargin) / totalDisplayPoints;	
@@ -165,11 +165,13 @@ var BurnDownGraph = {
 		for (var y=0;y<=Math.floor(this._points)+yIncrement;y=y+yIncrement) {
 			var thisY = this._offsetYtopMargin+y*verticalSpacing;
 			this._writeText(currentPointsLabel, 15, thisY, "24px Arial", "#202020");
+			this._writeText(currentPointsLabel, this._graphWidth + 5, thisY, "24px Arial", "#202020");
 			this._drawLine(this._offsetX, thisY, this._graphWidth, thisY, '#c0c0c0', 2);
 			currentPointsLabel = currentPointsLabel - yIncrement;
 		}
 
 		// diagonal!
+		this._writeText(currentPoints, 15, yStartPoint, "24px Arial", "#5050E2");
 		this._drawLine(this._offsetX, yStartPoint, this._graphWidth, thisY, '#c0c0E2', 4);
 
 		// horizontal!
